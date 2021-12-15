@@ -12,7 +12,7 @@ entity DEBOUNCER is
 end DEBOUNCER;
 
 architecture beh of DEBOUNCER is
-    constant CNT_SIZE : integer := 19;
+    constant CNT_SIZE : integer := 20;
     signal btn_prev   : std_logic := '0';
     signal counter    : std_logic_vector(CNT_SIZE downto 0) := (others => '0');
 
