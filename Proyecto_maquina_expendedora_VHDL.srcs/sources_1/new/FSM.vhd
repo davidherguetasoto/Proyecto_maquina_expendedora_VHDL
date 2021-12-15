@@ -7,13 +7,14 @@ entity FSM is
            CLK : in STD_LOGIC;
            RESET : in STD_LOGIC;
            LED : out STD_LOGIC_VECTOR (2 downto 0);
-           DONE : out STD_LOGIC;
+           VENDING : out STD_LOGIC;
            ERROR : out STD_LOGIC);
 end FSM;
 
-architecture Behavioral of FSM is
+architecture Structural of FSM is
+
 
 begin
 
 
-end Behavioral;
+end Structural;
