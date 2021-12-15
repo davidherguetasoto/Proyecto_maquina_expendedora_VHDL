@@ -4,7 +4,8 @@ entity EDGEDTCTR is
  port (
  CLK : in std_logic;
  sync_in : in std_logic;
- edge : out std_logic
+ edge : out std_logic;
+ reset: in std_logic
  );
 end EDGEDTCTR;
 architecture BEHAVIORAL of EDGEDTCTR is
@@ -12,7 +13,9 @@ architecture BEHAVIORAL of EDGEDTCTR is
 begin
  process (CLK)
  begin
- if rising_edge(CLK) then
+ if (reset='1') then
+ edge <= '0';
+ elsif rising_edge(CLK) then
  sreg <= sreg(1 downto 0) & sync_in;
  end if;
  end process;
