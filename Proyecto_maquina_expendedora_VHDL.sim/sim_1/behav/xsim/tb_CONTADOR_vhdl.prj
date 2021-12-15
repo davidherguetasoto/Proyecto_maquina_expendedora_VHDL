@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../Proyecto_maquina_expendedora_VHDL.srcs/sources_1/new/CONTADOR.vhd" \
+"../../../../Proyecto_maquina_expendedora_VHDL.srcs/sim_1/new/contador_tb.vhd" \
+
+# Do not sort compile order
+nosort

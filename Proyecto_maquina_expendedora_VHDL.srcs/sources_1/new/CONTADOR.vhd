@@ -30,19 +30,23 @@ begin
             if DONE='1' OR ERROR='1' then
                 cuenta_aux<="00000";
                 
-            elsif ten_cent='1' then
+            else 
+            if ten_cent='1' then
                 cuenta_aux<=cuenta_aux+"00001";
-                
-            elsif twenty_cent='1' then
-                cuenta_aux<=cuenta_aux+"00010";
-                
-            elsif fifty_cent='1' then
-                cuenta_aux<=cuenta_aux+"00101";
-                
-            elsif one_euro='1' then
-                cuenta_aux<=cuenta_aux+"01010";
-                
             end if;
+                
+            if twenty_cent='1' then
+                cuenta_aux<=cuenta_aux+"00010";
+            end if;
+                
+            if fifty_cent='1' then
+                cuenta_aux<=cuenta_aux+"00101";
+            end if;
+                
+            if one_euro='1' then
+                cuenta_aux<=cuenta_aux+"01010";                
+            end if;
+       end if;
        end if;
         
        case cuenta_aux is

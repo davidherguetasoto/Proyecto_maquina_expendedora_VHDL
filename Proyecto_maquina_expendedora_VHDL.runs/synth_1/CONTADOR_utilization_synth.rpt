@@ -1,7 +1,7 @@
 Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2021.1 (win64) Build 3247384 Thu Jun 10 19:36:33 MDT 2021
-| Date         : Tue Dec 14 13:30:54 2021
+| Date         : Wed Dec 15 13:21:06 2021
 | Host         : DAVID-PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file CONTADOR_utilization_synth.rpt -pb CONTADOR_utilization_synth.pb
 | Design       : CONTADOR
@@ -30,8 +30,8 @@ Table of Contents
 +-------------------------+------+-------+------------+-----------+-------+
 |        Site Type        | Used | Fixed | Prohibited | Available | Util% |
 +-------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*             |   12 |     0 |          0 |     63400 |  0.02 |
-|   LUT as Logic          |   12 |     0 |          0 |     63400 |  0.02 |
+| Slice LUTs*             |   11 |     0 |          0 |     63400 |  0.02 |
+|   LUT as Logic          |   11 |     0 |          0 |     63400 |  0.02 |
 |   LUT as Memory         |    0 |     0 |          0 |     19000 |  0.00 |
 | Slice Registers         |    5 |     0 |          0 |    126800 | <0.01 |
 |   Register as Flip Flop |    5 |     0 |          0 |    126800 | <0.01 |
@@ -147,13 +147,13 @@ Table of Contents
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
 | IBUF     |    8 |                  IO |
-| LUT6     |    7 |                 LUT |
+| LUT6     |    6 |                 LUT |
 | FDCE     |    5 |        Flop & Latch |
 | OBUF     |    4 |                  IO |
+| LUT5     |    2 |                 LUT |
 | LUT4     |    2 |                 LUT |
-| LUT3     |    2 |                 LUT |
 | LUT2     |    2 |                 LUT |
-| LUT5     |    1 |                 LUT |
+| LUT3     |    1 |                 LUT |
 | LUT1     |    1 |                 LUT |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
