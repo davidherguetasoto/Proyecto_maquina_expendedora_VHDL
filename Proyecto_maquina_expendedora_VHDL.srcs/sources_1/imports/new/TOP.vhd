@@ -11,7 +11,9 @@ button_1euro: IN std_logic;
 clk: IN std_logic;
 reset: IN std_logic;
 producto: in std_logic_vector(2 downto 0);
-led : out std_logic_vector(2 downto 0)
+led : out std_logic_vector(2 downto 0);
+digsel : out std_logic_vector(7 downto 0);
+segmentos : out std_logic_vector(7 downto 0)
 );
 end TOP;
 
@@ -84,6 +86,16 @@ PORT (
     LED : out STD_LOGIC_VECTOR (2 downto 0);
     VENDING : out STD_LOGIC;
     ERROR : out STD_LOGIC
+    );
+END COMPONENT;
+
+COMPONENT Display_Control port(
+    cuenta : IN std_logic_vector(3 DOWNTO 0);
+    clk: IN std_logic;
+    error: IN std_logic;
+    vending: IN std_logic;
+    digsel : OUT std_logic_vector(7 DOWNTO 0);
+    segmentos : OUT std_logic_vector(7 DOWNTO 0)
     );
 END COMPONENT;
 
@@ -184,6 +196,15 @@ RESET=>reset,
 LED=>led,
 VENDING=>vending,
 ERROR=>error 
+);
+
+Inst_DISPLAY_CONTROL: Display_Control port map(
+clk=>clk,
+error=>error,
+vending=>vending,
+digsel=>digsel,
+segmentos=>segmentos,
+cuenta=> cuenta
 );
 
 end Behavioral;

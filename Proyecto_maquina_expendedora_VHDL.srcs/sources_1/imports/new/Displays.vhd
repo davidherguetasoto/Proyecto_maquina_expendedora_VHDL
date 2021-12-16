@@ -1,27 +1,18 @@
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
  use ieee.numeric_std.all; 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
 
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
-entity Displays is
+entity Display_Control is
   PORT(cuenta : IN std_logic_vector(3 DOWNTO 0);
     clk: IN std_logic;
     error: IN std_logic;
-    done: IN std_logic;
+    vending: IN std_logic;
     digsel : OUT std_logic_vector(7 DOWNTO 0);
     segmentos : OUT std_logic_vector(7 DOWNTO 0) --teniendo en cuenta el punto del display será vector de 8 bits
     );
-end Displays;
+end Display_Control;
 
-architecture Behavioral of Displays is
+architecture Behavioral of Display_Control is
     --signal anodos: std_logic_vector(7 downto 0);
     signal numero : integer;
     signal anodos: natural range 0 to 7 :=0;
@@ -85,7 +76,7 @@ begin
          end case;
       end if;
       
-       if done='1' then --ERROR
+       if vending='1' then --ERROR
          case anodos is
            when 4=>digsel <="11101111";
            when 5=>digsel <="11011111";
@@ -221,7 +212,7 @@ begin
          end case;
         end if;
         
-        if done='1' then --Producto vendido
+        if vending='1' then --Producto vendido
         case anodos is
          --SOLD
            when 4=>counter<=10;--d
