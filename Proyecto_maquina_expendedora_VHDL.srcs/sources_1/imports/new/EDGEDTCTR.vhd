@@ -11,15 +11,18 @@ end EDGEDTCTR;
 architecture BEHAVIORAL of EDGEDTCTR is
  signal sreg : std_logic_vector(2 downto 0);
 begin
- process (CLK, reset)
+ process (CLK)
  begin
- if (reset='1') then
- edge <= '0';
- elsif rising_edge(CLK) then
+ if rising_edge(CLK) then
  sreg <= sreg(1 downto 0) & sync_in;
  end if;
  end process;
- with sreg select
- edge <= '1' when "100",
- '0' when others;
+ 
+ edge<= '0' when RESET='0' else
+        '1' when sreg="100" else
+        '0';
+        
+-- with sreg select
+-- edge <= '1' when "100",
+-- '0' when others;
 end BEHAVIORAL;
