@@ -23,7 +23,7 @@ begin
     process(CLK, RESET)
     begin  
         if RESET='0' then
-            cuenta_aux<="00000";
+--            cuenta_aux<="00000";
             CUENTA<=(others=>'0');
             
         elsif rising_edge(CLK)then       

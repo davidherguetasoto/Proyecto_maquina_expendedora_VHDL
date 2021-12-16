@@ -166,10 +166,10 @@ reset => reset
 
 Inst_CONTADOR: CONTADOR PORT MAP(
 CLK=>CLK,
-ten_cent=>deb_media,
-twenty_cent=>deb_media2,
-fifty_cent=>deb_media3,
-one_euro=>deb_media4,
+ten_cent=>sal_edge,
+twenty_cent=>sal_edge2,
+fifty_cent=>sal_edge3,
+one_euro=>sal_edge4,
 RESET=>reset,
 ERROR=>error,
 vending=>vending,
