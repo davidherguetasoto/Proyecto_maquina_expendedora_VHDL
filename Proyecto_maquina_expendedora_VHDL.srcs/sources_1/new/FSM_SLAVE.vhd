@@ -7,29 +7,35 @@ entity SLAVE_FSM is
            RESET : in STD_LOGIC;
            START : in STD_LOGIC;
            DELAY : in UNSIGNED (7 downto 0);
-           DONE : out STD_LOGIC
+           DONE : out STD_LOGIC;
+           count : inout unsigned(7 downto 0):="00000000"
            );
 end SLAVE_FSM;
 
 architecture Behavioral of SLAVE_FSM is
 
-signal count : unsigned(DELAY'range);
+signal done_aux : std_logic:='0';
+
 begin
   process (CLK, RESET)
   begin
     if RESET = '0' then
       count <= (others => '0');
+      done_aux<='0';
     elsif rising_edge(CLK) then
       if START='1' then
         count <= DELAY;
-      elsif count /= 0 then
+      elsif count /= "00000000" then
        count <= count - 1;
-       if count=0 then
-        DONE<='1';
-       else
-        DONE<='0';
-       end if;
+      end if;
+      if count="00000000" then
+          done_aux<='1';
+      else 
+          done_aux<='0';
       end if;
     end if;
   end process;
+  
+DONE<=done_aux;
+  
 end Behavioral;
