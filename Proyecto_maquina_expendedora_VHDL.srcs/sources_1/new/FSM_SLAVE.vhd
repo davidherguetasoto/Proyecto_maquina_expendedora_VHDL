@@ -15,8 +15,6 @@ architecture Behavioral of SLAVE_FSM is
 
 signal count : unsigned(DELAY'range);
 begin
-  DONE <= '1' when count = 0 else '0';
-
   process (CLK, RESET)
   begin
     if RESET = '0' then
@@ -25,7 +23,12 @@ begin
       if START='1' then
         count <= DELAY;
       elsif count /= 0 then
-        count <= count - 1;
+       count <= count - 1;
+       if count=0 then
+        DONE<='1';
+       else
+        DONE<='0';
+       end if;
       end if;
     end if;
   end process;

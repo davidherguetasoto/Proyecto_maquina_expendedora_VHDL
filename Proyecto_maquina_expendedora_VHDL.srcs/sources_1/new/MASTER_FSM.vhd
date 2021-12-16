@@ -30,7 +30,7 @@ type STATE is (
 signal next_state : STATE;
 signal present_state : STATE:=S0;
 
-constant ERROR_DURATION : positive :=5; --DURACIÓN DE ESPERA TRAS ESTADO DE ERROR EN SEGUNDOS
+constant ERROR_DURATION : positive :=5; --DURACIÓN DE ESPERA TRAS ESTADO DE ERROR EN CICLOS DE RELOJ
 constant VENDING_DURATION: positive:=5; --DURACIÓN DE ESPERA TRAS VENTA
 
 begin
