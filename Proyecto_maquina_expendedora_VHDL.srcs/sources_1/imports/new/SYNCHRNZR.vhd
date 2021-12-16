@@ -11,7 +11,7 @@ end SYNCHRNZR;
 architecture BEHAVIORAL of SYNCHRNZR is
  signal sreg : std_logic_vector(1 downto 0);
 begin
- process (CLK)
+ process (CLK,reset)
  begin
  if (reset='1') then
  sync_out <= '0';
