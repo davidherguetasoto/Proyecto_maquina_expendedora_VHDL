@@ -16,37 +16,38 @@ end CONTADOR;
 
 architecture Behavioral of CONTADOR is
 
-signal cuenta_aux : unsigned(4 downto 0):=(others=>'0');
+signal cuenta_aux : unsigned(4 downto 0);
 
 begin
 
     process(CLK, RESET)
     begin  
         if RESET='0' then
---            cuenta_aux<="00000";
+            cuenta_aux<="00000";
             CUENTA<=(others=>'0');
             
         elsif rising_edge(CLK)then       
-            if VENDING='1' OR ERROR='1' then
+            if ERROR='1' then
                 cuenta_aux<="00000";
-                
+            elsif VENDING='1' then
+                cuenta_aux<="00000";              
             else 
-            if ten_cent='1' then
-                cuenta_aux<=cuenta_aux+"00001";
-            end if;
+                if ten_cent='1' then
+                  cuenta_aux<=cuenta_aux+"00001";
+                end if;
                 
-            if twenty_cent='1' then
-                cuenta_aux<=cuenta_aux+"00010";
-            end if;
+                if twenty_cent='1' then
+                  cuenta_aux<=cuenta_aux+"00010";
+                end if;
                 
-            if fifty_cent='1' then
-                cuenta_aux<=cuenta_aux+"00101";
-            end if;
+                if fifty_cent='1' then
+                  cuenta_aux<=cuenta_aux+"00101";
+                end if;
                 
-            if one_euro='1' then
-                cuenta_aux<=cuenta_aux+"01010";                
+                if one_euro='1' then
+                  cuenta_aux<=cuenta_aux+"01010";                
+                end if;
             end if;
-       end if;
        end if;
         
        case cuenta_aux is
