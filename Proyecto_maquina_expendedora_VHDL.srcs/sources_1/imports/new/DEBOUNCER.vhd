@@ -17,7 +17,7 @@ architecture beh of DEBOUNCER is
     signal counter    : std_logic_vector(CNT_SIZE downto 0) := (others => '0');
 
 begin
-    process(clk)
+    process(clk,reset)
     begin
     if (reset='1') then
     btn_out <= '0';
