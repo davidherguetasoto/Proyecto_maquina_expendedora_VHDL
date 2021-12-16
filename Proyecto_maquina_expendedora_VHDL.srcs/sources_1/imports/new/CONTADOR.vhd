@@ -10,7 +10,7 @@ entity CONTADOR is
            one_euro : in STD_LOGIC;
            RESET : in STD_LOGIC;
            ERROR : in STD_LOGIC;
-           DONE : in STD_LOGIC;
+           VENDING : in STD_LOGIC;
            CUENTA : out STD_LOGIC_VECTOR (3 downto 0));
 end CONTADOR;
 
@@ -27,7 +27,7 @@ begin
             CUENTA<=(others=>'0');
             
         elsif rising_edge(CLK)then       
-            if DONE='1' OR ERROR='1' then
+            if VENDING='1' OR ERROR='1' then
                 cuenta_aux<="00000";
                 
             else 

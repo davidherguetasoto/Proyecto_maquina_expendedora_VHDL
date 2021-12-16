@@ -22,7 +22,7 @@ begin
     if RESET = '0' then
       count <= (others => '0');
     elsif rising_edge(CLK) then
-      if rising_edge(START) then
+      if START='1' then
         count <= DELAY;
       elsif count /= 0 then
         count <= count - 1;

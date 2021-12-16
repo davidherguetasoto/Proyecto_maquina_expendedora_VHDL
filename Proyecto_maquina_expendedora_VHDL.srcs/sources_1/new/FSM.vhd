@@ -1,6 +1,5 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
 use ieee.numeric_std.all;
 
 entity FSM is
@@ -30,7 +29,7 @@ component MASTER_FSM port(
 end component;
 
 component SLAVE_FSM port(
-             CLK : in STD_LOGIC;
+           CLK : in STD_LOGIC;
            RESET : in STD_LOGIC;
            START : in STD_LOGIC;
            DELAY : in UNSIGNED (7 downto 0);
@@ -38,8 +37,17 @@ component SLAVE_FSM port(
            );
 end component;
 
+component EDGEDTCTR port(
+           CLK : in std_logic;
+           sync_in : in std_logic;
+           edge : out std_logic;
+           reset: in std_logic
+            );
+end component;
+
 signal done, start : std_logic;
 signal delay : unsigned(7 downto 0);
+signal start_edge : std_logic;
 begin
 
     Inst_MASTER_FSM: MASTER_FSM port map(
@@ -57,8 +65,15 @@ begin
      Inst_SLAVE_FSM: SLAVE_FSM port map(
                             CLK=>CLK,
                             RESET=>RESET,
-                            START=>start,
+                            START=>start_edge,
                             DELAY=>delay, 
                             DONE=>DONE );
+                            
+     Inst_EDGEDTCTR_FSM: EDGEDTCTR port map(
+                            CLK=>CLK,
+                            reset=>RESET,
+                            sync_in=>start,
+                            edge=>start_edge
+                            );
 
 end Structural;

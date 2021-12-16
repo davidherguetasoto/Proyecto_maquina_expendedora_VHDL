@@ -1,6 +1,5 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
 use ieee.numeric_std.all;
 
 entity MASTER_FSM is
@@ -79,7 +78,7 @@ begin
                        next_state<= S7;
                        elsif CUENTA="1010" then
                        next_state<=S6;
-                       elsif PRODUCTO(0)='1' OR PRODUCTO(1)='1' OR PRODUCTO(3)='0' then
+                       elsif PRODUCTO(0)='1' OR PRODUCTO(1)='1' OR PRODUCTO(2)='0' then
                        next_state<=S0;
                        end if;
             
