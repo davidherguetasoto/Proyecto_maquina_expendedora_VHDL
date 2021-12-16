@@ -13,8 +13,9 @@ architecture BEHAVIORAL of SYNCHRNZR is
 begin
  process (CLK,reset)
  begin
- if (reset='1') then
+ if (reset='0') then
  sync_out <= '0';
+ sreg <="00";
  elsif rising_edge(CLK) then
  sync_out <= sreg(1);
  sreg <= sreg(0) & async_in;

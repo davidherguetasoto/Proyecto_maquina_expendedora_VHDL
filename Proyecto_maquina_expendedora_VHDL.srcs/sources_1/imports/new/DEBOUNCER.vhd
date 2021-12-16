@@ -19,7 +19,7 @@ architecture beh of DEBOUNCER is
 begin
     process(clk,reset)
     begin
-    if (reset='1') then
+    if (reset='0') then
     btn_out <= '0';
 	elsif (CLK'event and CLK='1') then
 		if (btn_prev xor btn_in) = '1' then
