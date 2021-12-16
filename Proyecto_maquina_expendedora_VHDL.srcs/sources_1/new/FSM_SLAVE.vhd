@@ -15,21 +15,24 @@ end SLAVE_FSM;
 architecture Behavioral of SLAVE_FSM is
 
 signal done_aux : std_logic:='0';
-
+signal aux_start : std_logic:='0';
 begin
   process (CLK, RESET)
   begin
     if RESET = '0' then
       count <= (others => '0');
       done_aux<='0';
+      aux_start<='0';
     elsif rising_edge(CLK) then
       if START='1' then
+        aux_start<='1';
         count <= DELAY;
       elsif count /= "00000000" then
        count <= count - 1;
       end if;
-      if count="00000000" then
+      if count="00000000" and aux_start='1' then
           done_aux<='1';
+          aux_start<='0';
       else 
           done_aux<='0';
       end if;

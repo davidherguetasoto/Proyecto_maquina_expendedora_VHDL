@@ -47,12 +47,12 @@ begin
     stimuli : process
     begin
         -- EDIT Adapt initialization as needed
-        start <= '1' after 2ns, '0' after 4 ns;
+        start <= '1' after 2ns, '0' after 4 ns, '1' after 10 ns, '0' after 16 ns;
         delay <= (others=>'0'), "00000101" after 2ns;
 
         -- Reset generation
         -- EDIT: Check that RESET is really your reset signal
-        RESET <= '1', '0' after 12 ns;
+        RESET <= '1', '0' after 12 ns, '1' after 14 ns;
         -- EDIT Add stimuli here
         --wait for 100 * TbPeriod;
 

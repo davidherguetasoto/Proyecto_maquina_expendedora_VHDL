@@ -45,16 +45,16 @@ component EDGEDTCTR port(
             );
 end component;
 
-component PRESCALER port(
-            clk100mhz: 	in STD_LOGIC;
-	        clk: out STD_LOGIC
-            );
-end component;
+--component PRESCALER port(
+--            clk100mhz: 	in STD_LOGIC;
+--	        clk: out STD_LOGIC
+--            );
+--end component;
 
 signal done, start : std_logic;
 signal delay : unsigned(7 downto 0);
 signal start_edge : std_logic;
-signal clk1Hz : std_logic;
+--signal clk1Hz : std_logic;
 begin
 
     Inst_MASTER_FSM: MASTER_FSM port map(
@@ -83,8 +83,8 @@ begin
                             edge=>start_edge
                             );
       
-      Inst_PRESCALER: PRESCALER port map(
-                            clk100mhz=>CLK,
-                            clk=>clk1Hz                   
-                            );
+--      Inst_PRESCALER: PRESCALER port map(
+--                            clk100mhz=>CLK,
+--                            clk=>clk1Hz                   
+--                            );
 end Structural;
