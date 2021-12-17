@@ -30,7 +30,7 @@ component MASTER_FSM port(
            START : out STD_LOGIC;
            VENDING : out STD_LOGIC;
            LED : out STD_LOGIC_VECTOR (2 downto 0);
-           DELAY : out unsigned(7 downto 0)
+           DELAY : out unsigned(29 downto 0)
            );
 end component;
 
@@ -38,7 +38,7 @@ component SLAVE_FSM port(
            CLK : in STD_LOGIC;
            RESET : in STD_LOGIC;
            START : in STD_LOGIC;
-           DELAY : in UNSIGNED (7 downto 0);
+           DELAY : in UNSIGNED (29 downto 0);
            DONE : out STD_LOGIC
            --count_viewer : out unsigned(7 downto 0);
            --aux_start_viewer : out std_logic
@@ -54,7 +54,7 @@ component EDGEDTCTR port(
 end component;
 
 signal done, start : std_logic;
-signal delay : unsigned(7 downto 0);
+signal delay : unsigned(29 downto 0);
 signal start_edge : std_logic;
 signal edge_in : std_logic;
 

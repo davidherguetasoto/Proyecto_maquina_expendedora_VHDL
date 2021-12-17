@@ -54,16 +54,16 @@ begin
          end case;
        end if;
          
-        if numero>10 then --mayor a 1€
-         case anodos is
-           when 3=>digsel <="11110111";
-           when 4=>digsel <="11101111";
-           when 5=>digsel <="11011111";
-           when 6=>digsel <="10111111";
-           when 7=>digsel <="01111111";
-           when others=>digsel<="11111111";
-         end case;
-      end if;
+--       if numero>10 then --mayor a 1€
+--         case anodos is
+--           when 3=>digsel <="11110111";
+--           when 4=>digsel <="11101111";
+--           when 5=>digsel <="11011111";
+--           when 6=>digsel <="10111111";
+--           when 7=>digsel <="01111111";
+--           when others=>digsel<="11111111";
+--         end case;
+--      end if;
       
       if error='1' then --ERROR
          case anodos is
@@ -76,7 +76,7 @@ begin
          end case;
       end if;
       
-       if vending='1' then --ERROR
+       if vending='1' then --sold
          case anodos is
            when 4=>digsel <="11101111";
            when 5=>digsel <="11011111";
@@ -190,16 +190,16 @@ begin
          end case;
         end if;
         
-        if numero>10 then --mayor que 1.0€
-        case anodos is
-           when 3=>counter<=11;--e
-           when 4=>counter<=14;--r
-           when 5=>counter<=14;--r
-           when 6=>counter<=13;--o
-           when 7=>counter<=14;--r
-           when others=>counter<=18;--no muestra nada en display
-         end case;
-        end if;
+--        if numero>10 then --mayor que 1.0€
+--        case anodos is
+--           when 3=>counter<=11;--e
+--           when 4=>counter<=14;--r
+--           when 5=>counter<=14;--r
+--           when 6=>counter<=13;--o
+--           when 7=>counter<=14;--r
+--           when others=>counter<=18;--no muestra nada en display
+--         end case;
+--        end if;
         
          if error='1' then --ERROR
         case anodos is

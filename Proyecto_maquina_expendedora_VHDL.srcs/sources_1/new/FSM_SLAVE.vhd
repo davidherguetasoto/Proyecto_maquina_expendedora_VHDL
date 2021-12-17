@@ -6,7 +6,7 @@ entity SLAVE_FSM is
     Port ( CLK : in STD_LOGIC;
            RESET : in STD_LOGIC;
            START : in STD_LOGIC;
-           DELAY : in UNSIGNED (7 downto 0);
+           DELAY : in UNSIGNED (29 downto 0);
            DONE : out STD_LOGIC
            --count_viewer : out UNSIGNED (7 downto 0);
            --aux_start_viewer : out std_logic
@@ -15,7 +15,7 @@ end SLAVE_FSM;
 
 architecture Behavioral of SLAVE_FSM is
 
-signal count: unsigned(7 downto 0):="00000000";
+signal count: unsigned(29 downto 0):="000000000000000000000000000000";
 signal aux_start : std_logic:='0';
 signal aux_done : std_logic:='0'; 
 begin

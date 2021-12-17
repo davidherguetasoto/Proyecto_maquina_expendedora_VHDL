@@ -12,7 +12,7 @@ entity MASTER_FSM is
            START : out STD_LOGIC;
            VENDING : out STD_LOGIC;
            LED : out STD_LOGIC_VECTOR (2 downto 0);
-           DELAY : out unsigned(7 downto 0));
+           DELAY : out unsigned(29 downto 0));
 end MASTER_FSM;
 
 architecture Behavioral of MASTER_FSM is
