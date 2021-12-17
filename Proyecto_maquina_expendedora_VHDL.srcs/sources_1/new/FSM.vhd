@@ -9,11 +9,11 @@ entity FSM is
            RESET : in STD_LOGIC;
            LED : out STD_LOGIC_VECTOR (2 downto 0);
            VENDING : out STD_LOGIC;
-           ERROR : out STD_LOGIC;
-           count : out unsigned(7 downto 0)
-           --start_viewer : out std_logic;
+           ERROR : out STD_LOGIC
+           --count : out unsigned(29 downto 0);
+          -- start_viewer : out std_logic;
            --edge_viewer : out std_logic;
-           --done_viewer : out std_logic;
+          -- done_viewer : out std_logic;
            --aux_start_viewer : out std_logic
            );
 end FSM;
@@ -40,7 +40,7 @@ component SLAVE_FSM port(
            START : in STD_LOGIC;
            DELAY : in UNSIGNED (29 downto 0);
            DONE : out STD_LOGIC
-           --count_viewer : out unsigned(7 downto 0);
+           --count_viewer : out unsigned(29 downto 0);
            --aux_start_viewer : out std_logic
            );
 end component;

@@ -8,14 +8,14 @@ entity SLAVE_FSM is
            START : in STD_LOGIC;
            DELAY : in UNSIGNED (29 downto 0);
            DONE : out STD_LOGIC
-           --count_viewer : out UNSIGNED (7 downto 0);
+           --count_viewer : out UNSIGNED (29 downto 0);
            --aux_start_viewer : out std_logic
            );
 end SLAVE_FSM;
 
 architecture Behavioral of SLAVE_FSM is
 
-signal count: unsigned(29 downto 0):="000000000000000000000000000000";
+signal count: unsigned(29 downto 0):=(others=>'0');
 signal aux_start : std_logic:='0';
 signal aux_done : std_logic:='0'; 
 begin
@@ -41,9 +41,7 @@ begin
            aux_start<='0';
          end if;
       elsif aux_start='0' then
-          if START='1' then
           aux_done<='0';
-          end if;
       end if;
     end if;
   end process;
