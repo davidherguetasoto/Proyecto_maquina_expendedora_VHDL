@@ -30,8 +30,8 @@ type STATE is (
 signal next_state : STATE;
 signal present_state : STATE:=S0;
 
-constant ERROR_DURATION : positive :=5; --DURACIÓN DE ESPERA TRAS ESTADO DE ERROR EN CICLOS DE RELOJ
-constant VENDING_DURATION: positive:=5; --DURACIÓN DE ESPERA TRAS VENTA
+constant ERROR_DURATION : positive :=5000; --DURACIÓN DE ESPERA TRAS ESTADO DE ERROR EN CICLOS DE RELOJ
+constant VENDING_DURATION: positive:=5000; --DURACIÓN DE ESPERA TRAS VENTA
 
 begin
 
@@ -134,25 +134,25 @@ begin
             
             when S4=> LED<="001";
                       VENDING<='1';
-                      DELAY<=to_unsigned(VENDING_DURATION- 2, DELAY'length);
+                      DELAY<=to_unsigned(VENDING_DURATION, DELAY'length);
                       START<='1';
                       ERROR<='0';
             
             when S5=> LED<="010";
                       VENDING<='1';
-                      DELAY<=to_unsigned(VENDING_DURATION- 2, DELAY'length);
+                      DELAY<=to_unsigned(VENDING_DURATION, DELAY'length);
                       START<='1';
                       ERROR<='0';
             
             when S6=> LED<="100";
                       VENDING<='1';
-                      DELAY<=to_unsigned(VENDING_DURATION- 2, DELAY'length);
+                      DELAY<=to_unsigned(VENDING_DURATION, DELAY'length);
                       START<='1';
                       ERROR<='0';
             
             when S7=> LED<=(others=>'0');
                       VENDING<='0';
-                      DELAY<=to_unsigned(ERROR_DURATION- 2, DELAY'length);
+                      DELAY<=to_unsigned(ERROR_DURATION, DELAY'length);
                       START<='1';
                       ERROR<='1';            
          end case;    
