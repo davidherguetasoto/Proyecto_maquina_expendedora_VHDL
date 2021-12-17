@@ -10,11 +10,12 @@ entity FSM is
            LED : out STD_LOGIC_VECTOR (2 downto 0);
            VENDING : out STD_LOGIC;
            ERROR : out STD_LOGIC;
-           count : out unsigned(7 downto 0);
-           start_viewer : out std_logic;
-           edge_viewer : out std_logic;
-           done_viewer : out std_logic;
-           aux_start_viewer : out std_logic);
+           count : out unsigned(7 downto 0)
+           --start_viewer : out std_logic;
+           --edge_viewer : out std_logic;
+           --done_viewer : out std_logic;
+           --aux_start_viewer : out std_logic
+           );
 end FSM;
 
 architecture Structural of FSM is
@@ -38,9 +39,9 @@ component SLAVE_FSM port(
            RESET : in STD_LOGIC;
            START : in STD_LOGIC;
            DELAY : in UNSIGNED (7 downto 0);
-           DONE : out STD_LOGIC;
-           count_viewer : out unsigned(7 downto 0);
-           aux_start_viewer : out std_logic
+           DONE : out STD_LOGIC
+           --count_viewer : out unsigned(7 downto 0);
+           --aux_start_viewer : out std_logic
            );
 end component;
 
@@ -55,11 +56,13 @@ end component;
 signal done, start : std_logic;
 signal delay : unsigned(7 downto 0);
 signal start_edge : std_logic;
+signal edge_in : std_logic;
 
 begin
-    start_viewer <= start;
-    edge_viewer<=start_edge;
-    done_viewer<=done;
+    --start_viewer <= start;
+    --edge_viewer<=start_edge;
+    --done_viewer<=done;
+   edge_in<=not start;
     Inst_MASTER_FSM: MASTER_FSM port map(
                            CLK=>CLK,
                            RESET=>RESET,
@@ -77,15 +80,15 @@ begin
                             RESET=>RESET,
                             START=>start_edge,
                             DELAY=>delay, 
-                            DONE=>done,
-                            count_viewer=>count,
-                            aux_start_viewer=>aux_start_viewer 
+                            DONE=>done
+                            --count_viewer=>count,
+                            --aux_start_viewer=>aux_start_viewer 
                             );
                             
      Inst_EDGEDTCTR_FSM: EDGEDTCTR port map(
                             CLK=>CLK,
                             reset=>RESET,
-                            sync_in=>not(start),
+                            sync_in=>edge_in,
                             edge=>start_edge
                             );
     

@@ -17,7 +17,7 @@ architecture Behavioral of Display_Control is
     signal numero : integer;
     signal anodos: natural range 0 to 7 :=0;
      signal counter: natural range 0 to 18 :=0;
-     signal clk_counter: natural range 0 to 200000 :=0;
+     signal clk_counter: natural range 0 to 2000 :=0;
 begin
    process(clk)
     begin
@@ -25,7 +25,7 @@ begin
        if rising_edge(clk) then
          clk_counter<=clk_counter + 1;
          --periodo/8 = 2 ms -> clk_counter=200000
-         if clk_counter>=200000 then
+         if clk_counter>=2000 then
             clk_counter<=0;
             anodos<=anodos +1;
               if anodos > 7 then

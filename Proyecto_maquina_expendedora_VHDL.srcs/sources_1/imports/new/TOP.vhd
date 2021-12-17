@@ -35,6 +35,7 @@ signal sal_edge4: std_logic;
 signal error : std_logic;
 signal vending: std_logic;
 signal cuenta: std_logic_vector (3 downto 0);
+--signal clk: std_logic;
 
 COMPONENT SYNCHRNZR
 PORT (
@@ -98,6 +99,12 @@ COMPONENT Display_Control port(
     segmentos : OUT std_logic_vector(7 DOWNTO 0)
     );
 END COMPONENT;
+
+--COMPONENT PRESCALER PORT(
+--    clk100mhz: 	in STD_LOGIC;
+--	clk_out:		out STD_LOGIC
+--);
+--END COMPONENT;
 
 begin
 
@@ -177,7 +184,7 @@ reset => reset
 );
 
 Inst_CONTADOR: CONTADOR PORT MAP(
-CLK=>CLK,
+CLK=>clk,
 ten_cent=>sal_edge,
 twenty_cent=>sal_edge2,
 fifty_cent=>sal_edge3,
@@ -207,4 +214,8 @@ segmentos=>segmentos,
 cuenta=> cuenta
 );
 
+--Inst_PRESCALER: PRESCALER port map(
+--clk100mhz=>clk100Mhz,
+--clk_out=>clk
+--);
 end Behavioral;

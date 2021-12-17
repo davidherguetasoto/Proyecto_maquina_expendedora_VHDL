@@ -23,8 +23,4 @@ begin
  edge<= '0' when reset='0' else
         '1' when sreg="100" else
         '0';
-        
--- with sreg select
--- edge <= '1' when "100",
--- '0' when others;
 end BEHAVIORAL;
