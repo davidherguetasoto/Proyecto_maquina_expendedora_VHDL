@@ -36,6 +36,8 @@ architecture tb of tb_FSM is
     signal done_viewer : std_logic;
     signal aux_start_viewer : std_logic;
 
+--IMPORTANTE ANTES DE LANZAR LA SIULACIÓN, AJUSTAR LOS CICLOS DEL TEMPORIZADOR PARA LOS
+--TIEMPOS DE ERROR Y VENDER DE LA MASTER_FSM PARA AJUSTARLOS AL RELOJ DE LA SIMULACIÓN.
     constant TbPeriod : time := 10 ns; -- EDIT Put right period here
     signal TbClock : std_logic := '0';
     signal TbSimEnded : std_logic := '0';
