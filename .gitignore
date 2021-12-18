@@ -22,6 +22,10 @@
 #########
 #IP files
 #########
+#CONSTRAITS
+#########
+!*.xdc
+#########
 #.xci: synthesis and implemented not possible - you need to return back to the previous version to generate output products
 #.xci + .dcp: implementation possible but not re-synthesis
 #*.xci(www.spiritconsortium.org)
