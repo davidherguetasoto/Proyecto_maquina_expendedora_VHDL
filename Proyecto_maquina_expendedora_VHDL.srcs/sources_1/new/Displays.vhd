@@ -46,26 +46,11 @@ begin
            when 1=>digsel <="11111101";
            when 2=>digsel <="11111011";
            when others=>digsel<="11111111";
-         --  when 3=>digsel <="11110111";
-         -- when 4=>digsel <="11101111";
-          -- when 5=>digsel <="11011111";
-          -- when 6=>digsel <="10111111";
-          -- when 7=>digsel <="01111111";
          end case;
        end if;
          
---       if numero>10 then --mayor a 1€
---         case anodos is
---           when 3=>digsel <="11110111";
---           when 4=>digsel <="11101111";
---           when 5=>digsel <="11011111";
---           when 6=>digsel <="10111111";
---           when 7=>digsel <="01111111";
---           when others=>digsel<="11111111";
---         end case;
---      end if;
       
-      if error='1' then --ERROR
+      if error='1' then --ERRoR
          case anodos is
            when 3=>digsel <="11110111";
            when 4=>digsel <="11101111";
@@ -76,7 +61,7 @@ begin
          end case;
       end if;
       
-       if vending='1' then --sold
+       if vending='1' then --SoLD
          case anodos is
            when 4=>digsel <="11101111";
            when 5=>digsel <="11011111";
@@ -190,35 +175,24 @@ begin
          end case;
         end if;
         
---        if numero>10 then --mayor que 1.0€
---        case anodos is
---           when 3=>counter<=11;--e
---           when 4=>counter<=14;--r
---           when 5=>counter<=14;--r
---           when 6=>counter<=13;--o
---           when 7=>counter<=14;--r
---           when others=>counter<=18;--no muestra nada en display
---         end case;
---        end if;
-        
-         if error='1' then --ERROR
+         if error='1' then --ERRoR
         case anodos is
-           when 3=>counter<=14;--r
+           when 3=>counter<=14;--R
            when 4=>counter<=13;--o
-           when 5=>counter<=14;--r
-           when 6=>counter<=14;--r
-           when 7=>counter<=11;--e
+           when 5=>counter<=14;--R
+           when 6=>counter<=14;--R
+           when 7=>counter<=11;--E
            when others=>counter<=18;--no muestra nada en display
          end case;
         end if;
         
         if vending='1' then --Producto vendido
         case anodos is
-         --SOLD
-           when 4=>counter<=10;--d
-           when 5=>counter<=12;--l
+         --SoLD
+           when 4=>counter<=10;--D
+           when 5=>counter<=12;--L
            when 6=>counter<=13;--o
-           when 7=>counter<=15;--s
+           when 7=>counter<=15;--S
            when others=>counter<=18;--no muestra nada en display
          end case;
         end if;
@@ -242,7 +216,7 @@ begin
        when 10=>segmentos<="10000001"; --D
        when 11=>segmentos<="10110000"; --E
        when 12=>segmentos<="11110001"; --L
-       when 13=>segmentos<="11100010"; --O
+       when 13=>segmentos<="11100010"; --o
        when 14=>segmentos<="10001000"; --R
        when 15=>segmentos<="10100100"; --S
        when 16=>segmentos<="00000001"; --0.   nº 0 con punto
