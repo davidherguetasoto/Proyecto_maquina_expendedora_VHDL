@@ -14,7 +14,7 @@ architecture tb of tb_CONTADOR is
               one_euro    : in std_logic;
               RESET       : in std_logic;
               ERROR       : in std_logic;
-              DONE        : in std_logic;
+              VENDING        : in std_logic;
               CUENTA      : out std_logic_vector (3 downto 0));
     end component;
 
@@ -25,7 +25,7 @@ architecture tb of tb_CONTADOR is
     signal one_euro    : std_logic;
     signal RESET       : std_logic;
     signal ERROR       : std_logic;
-    signal DONE        : std_logic;
+    signal VENDING        : std_logic;
     signal CUENTA      : std_logic_vector (3 downto 0);
 
     constant TbPeriod : time := 10 ns; -- EDIT Put right period here
@@ -42,7 +42,7 @@ begin
               one_euro    => one_euro,
               RESET       => RESET,
               ERROR       => ERROR,
-              DONE        => DONE,
+              VENDING        => VENDING,
               CUENTA      => CUENTA);
 
     -- Clock generation
@@ -62,7 +62,7 @@ begin
         RESET<='1','0' after 110 ns,'1' after 120 ns, '0' after 160 ns, '1' after 200 ns;
         one_euro<='0','1' after 160 ns, '0' after 220 ns;
         fifty_cent<='0','1' after 280 ns, '0' after 300 ns;
-        DONE<='0','1' after 240 ns, '0' after 280 ns;
+        VENDING<='0','1' after 240 ns, '0' after 280 ns;
         ERROR<='0','1' after 320 ns;
 		
         -- Stop the clock and hence terminate the simulation

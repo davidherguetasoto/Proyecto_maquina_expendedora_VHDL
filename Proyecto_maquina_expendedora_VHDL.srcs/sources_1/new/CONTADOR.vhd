@@ -16,7 +16,7 @@ end CONTADOR;
 
 architecture Behavioral of CONTADOR is
 
-signal cuenta_aux : unsigned(4 downto 0);
+signal cuenta_aux : unsigned(4 downto 0):=(others=>'0');
 
 begin
 
