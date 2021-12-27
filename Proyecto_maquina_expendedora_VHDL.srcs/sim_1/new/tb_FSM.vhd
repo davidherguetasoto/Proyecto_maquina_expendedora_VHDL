@@ -15,7 +15,7 @@ architecture tb of tb_FSM is
               LED      : out std_logic_vector (2 downto 0);
               VENDING  : out std_logic;
               ERROR    : out std_logic;
-              count    : out unsigned (7 downto 0);
+              count    : out unsigned (29 downto 0);
               start_viewer : out std_logic;
               edge_viewer : out std_logic;
               done_viewer : out std_logic;
@@ -30,7 +30,7 @@ architecture tb of tb_FSM is
     signal LED      : std_logic_vector (2 downto 0);
     signal VENDING  : std_logic;
     signal ERROR    : std_logic;
-    signal count    : unsigned (7 downto 0);
+    signal count    : unsigned (29 downto 0);
     signal start_viewer : std_logic;
     signal edge_viewer : std_logic;
     signal done_viewer : std_logic;
