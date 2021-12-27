@@ -24,7 +24,8 @@ begin
   begin
     if RESET = '0' then
       count <= (others => '0');
-      aux_done<='0';   
+      aux_done<='0'; 
+      aux_start<='0';  
     elsif rising_edge(CLK) then
       if START='1' then
         count <= DELAY;

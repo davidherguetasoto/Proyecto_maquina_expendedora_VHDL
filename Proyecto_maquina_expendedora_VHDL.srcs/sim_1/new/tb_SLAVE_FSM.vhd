@@ -11,22 +11,24 @@ architecture tb of tb_SLAVE_FSM is
         port (CLK   : in std_logic;
               RESET : in std_logic;
               START : in std_logic;
-              DELAY : in unsigned (7 downto 0);
+              DELAY : in unsigned (29 downto 0);
               DONE  : out std_logic;
-              count : inout unsigned (7 downto 0)
+              count_viewer : out unsigned (29 downto 0);
+              aux_start_viewer : out std_logic
               );
     end component;
 
     signal clk   : std_logic;
     signal reset : std_logic;
     signal start : std_logic:='0';
-    signal delay : unsigned (7 downto 0);
+    signal delay : unsigned (29 downto 0);
     signal done  : std_logic;
 
     constant TbPeriod : time := 1 ns; -- EDIT Put right period here
     signal TbClock : std_logic := '0';
     signal TbSimEnded : std_logic := '0';
     signal count : unsigned (DELAY' range);
+    signal aux_start:std_logic;
 
 begin
 
@@ -36,7 +38,8 @@ begin
               START => start,
               DELAY => delay,
               DONE  => done,
-              count => count);
+              count_viewer => count,
+              aux_start_viewer=>aux_start);
 
     -- Clock generation
     TbClock <= not TbClock after TbPeriod/2 when TbSimEnded /= '1' else '0';
@@ -48,7 +51,7 @@ begin
     begin
         -- EDIT Adapt initialization as needed
         start <= '1' after 2ns, '0' after 4 ns, '1' after 10 ns, '0' after 16 ns;
-        delay <= (others=>'0'), "00000101" after 2ns;
+        delay <= (others=>'0'), to_unsigned(5,delay'length) after 2ns;
 
         -- Reset generation
         -- EDIT: Check that RESET is really your reset signal
