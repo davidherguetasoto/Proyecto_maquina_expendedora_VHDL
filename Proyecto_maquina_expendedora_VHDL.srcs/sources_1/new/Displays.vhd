@@ -24,13 +24,18 @@ begin
         --Periodo 1.6 ms-> clk_counter=160000
        if rising_edge(clk) then
          clk_counter<=clk_counter + 1;
-         --periodo/8 = 0.2 ms -> clk_counter=20000
+       
+         if anodos > 7 then
+            anodos<=0;
+         end if;
+         
+          --periodo/8 = 0.2 ms -> clk_counter=20000
          if clk_counter>=20000 then
             clk_counter<=0;
             anodos<=anodos +1;
-              if anodos > 7 then
-                anodos<=0;
-              end if;
+             -- if anodos > 7 then
+            --    anodos<=0;
+           --   end if;
          end if;
        end if;
 
