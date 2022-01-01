@@ -15,7 +15,7 @@ end Display_Control;
 architecture Behavioral of Display_Control is
     signal numero : integer;
     signal anodos: natural range 0 to 7 :=0;
-     signal counter: natural range 0 to 18 :=0;
+     signal show: natural range 0 to 18 :=0;
      signal clk_counter: natural range 0 to 20000 :=0;
 begin
    process(clk)
@@ -79,131 +79,131 @@ begin
      begin
        if numero=0 then --0€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=0;--nº 0
-           when 2=>counter<=16; --nºcero con punto
-           when others=>counter<=16;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=0;--nº 0
+           when 2=>show<=16; --nºcero con punto
+           when others=>show<=16;--no muestra nada en display
          end case;
         end if;
         
         if numero=1 then --0.1€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=1;--nº 1
-           when 2=>counter<=16;--nºcero con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=1;--nº 1
+           when 2=>show<=16;--nºcero con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if numero=2 then --0.2€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=2;-- nº 2
-           when 2=>counter<=16;--nºcero con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=2;-- nº 2
+           when 2=>show<=16;--nºcero con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if numero=3 then --0.3€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=3;--nº 3
-           when 2=>counter<=16;--nºcero con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=3;--nº 3
+           when 2=>show<=16;--nºcero con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if numero=4 then --0.4€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=4;-- nº4
-           when 2=>counter<=16;--nºcero con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=4;-- nº4
+           when 2=>show<=16;--nºcero con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if numero=5 then --0.5€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=5;--nº5
-           when 2=>counter<=16;--nºcero con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=5;--nº5
+           when 2=>show<=16;--nºcero con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if numero=6 then --0.6€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=6;--nº6
-           when 2=>counter<=16;--nºcero con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=6;--nº6
+           when 2=>show<=16;--nºcero con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if numero=7 then --0.7€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=7;--nº7
-           when 2=>counter<=16;--nºcero con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=7;--nº7
+           when 2=>show<=16;--nºcero con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if numero=8 then --0.8€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=8;--nº8
-           when 2=>counter<=16;--nºcero con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=8;--nº8
+           when 2=>show<=16;--nºcero con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if numero=9 then --0.9€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=9;--nº9
-           when 2=>counter<=16;--nºcero con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=9;--nº9
+           when 2=>show<=16;--nºcero con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if numero=10 then --1.0€
         case anodos is
-           when 0=>counter<=0;
-           when 1=>counter<=0;
-           when 2=>counter<=17;--nº uno con punto
-           when others=>counter<=18;--no muestra nada en display
+           when 0=>show<=0;
+           when 1=>show<=0;
+           when 2=>show<=17;--nº uno con punto
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
          if error='1' then --ERRoR
         case anodos is
-           when 3=>counter<=14;--R
-           when 4=>counter<=13;--o
-           when 5=>counter<=14;--R
-           when 6=>counter<=14;--R
-           when 7=>counter<=11;--E
-           when others=>counter<=18;--no muestra nada en display
+           when 3=>show<=14;--R
+           when 4=>show<=13;--o
+           when 5=>show<=14;--R
+           when 6=>show<=14;--R
+           when 7=>show<=11;--E
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
         if vending='1' then --Producto vendido
         case anodos is
          --SoLD
-           when 4=>counter<=10;--D
-           when 5=>counter<=12;--L
-           when 6=>counter<=13;--o
-           when 7=>counter<=15;--S
-           when others=>counter<=18;--no muestra nada en display
+           when 4=>show<=10;--D
+           when 5=>show<=12;--L
+           when 6=>show<=13;--o
+           when 7=>show<=15;--S
+           when others=>show<=18;--no muestra nada en display
          end case;
         end if;
         
    end process;
   
    --Activar los segmentos del display
-   process(counter)
+   process(show)
      begin
-      case counter is
+      case show is
        when 0=>segmentos<="10000001"; --0
        when 1=>segmentos<="11001111"; --1
        when 2=>segmentos<="10010010"; --2
