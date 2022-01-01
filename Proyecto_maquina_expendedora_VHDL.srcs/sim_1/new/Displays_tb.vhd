@@ -22,7 +22,7 @@ architecture tb of Displays_tb is
     signal cuenta    : std_logic_vector (3 downto 0);
     signal clk      : std_logic:='0';
     signal error     : std_logic;
-    signal done      : std_logic;
+    signal vending      : std_logic;
     signal digsel    : std_logic_vector (7 downto 0);
     signal segmentos : std_logic_vector (7 downto 0);
 
@@ -36,7 +36,7 @@ begin
     port map (cuenta    => cuenta,
               clk       => clk,
               error     => error,
-              vending      => done,
+              vending      => vending,
               digsel    => digsel,
               segmentos => segmentos);
 
@@ -52,20 +52,20 @@ begin
        wait for 10ns;
        cuenta<="0011";
         error <= '0';
-        done <= '0';
+        vending <= '0';
         
     wait for 17ms;
        cuenta<="0000";
-       done<='1';
+       vending<='1';
        
          wait for 16ms;
        cuenta<="0000";
-       done<='0';
+       vending<='0';
         error <= '1';
 
         wait for 16ms;
        cuenta<="0000";
-       done<='0';
+       vending<='0';
        error <= '0';
         -- Stop the clock and hence terminate the simulation
         TbSimEnded <= '1';
