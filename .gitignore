@@ -87,7 +87,7 @@
 
 ## others
 unisims
-
+*.pdf
 ## C-files
 *.elf
 *.a
