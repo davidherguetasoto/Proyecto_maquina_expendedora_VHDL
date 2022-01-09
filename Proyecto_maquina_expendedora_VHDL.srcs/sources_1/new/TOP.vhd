@@ -4,38 +4,45 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity TOP is
 PORT(
-button_10cent: IN std_logic;
-button_20cent: IN std_logic;
-button_50cent: IN std_logic;
-button_1euro: IN std_logic;
-clk: IN std_logic;
-reset: IN std_logic;
-producto: in std_logic_vector(2 downto 0);
-led : out std_logic_vector(2 downto 0);
-digsel : out std_logic_vector(7 downto 0);
-segmentos : out std_logic_vector(7 downto 0)
+button_10cent: IN std_logic; -- Entrada botón moneda 10 cents 
+button_20cent: IN std_logic; -- Entrada botón moneda 20 cents 
+button_50cent: IN std_logic; -- Entrada botón moneda 50 cents 
+button_1euro: IN std_logic;  -- Entrada botón moneda 1 euro 
+clk: IN std_logic; -- Señal de reloj 
+reset: IN std_logic; -- Señal de RESET 
+producto: in std_logic_vector(2 downto 0);   -- Entrada para los switches que servirán para seleccionar el producto deseado
+led : out std_logic_vector(2 downto 0);      -- Salida para encender los LEDs de cada producto
+digsel : out std_logic_vector(7 downto 0);   -- Salida para la activación de cada uno de los displays de la placa 
+segmentos : out std_logic_vector(7 downto 0) -- Salida para la activación de cada uno de los segmentos los display de la placa
 );
 end TOP;
 
 
 architecture Behavioral of TOP is
 
+--Señales intermedias de los sincronizadores
 signal sync_media: std_logic;
 signal sync_media2: std_logic;
 signal sync_media3: std_logic;
 signal sync_media4: std_logic;
+--Señales para las salidas de los debouncers
 signal deb_media: std_logic;
 signal deb_media2: std_logic;
 signal deb_media3: std_logic;
 signal deb_media4: std_logic;
+--Señales para las salidas de los detectores de flanco
 signal sal_edge: std_logic;
 signal sal_edge2: std_logic;
 signal sal_edge3: std_logic;
 signal sal_edge4: std_logic;
+--Señal para el bit de error de la FSM
 signal error : std_logic;
+--Señal para el bit de venta de la FSM
 signal vending: std_logic;
+--Señal para llevar la cuenta del dinero del contador
 signal cuenta: std_logic_vector (3 downto 0);
 
+--COMPONENTES DE LA ENTIDAD
 COMPONENT SYNCHRNZR
 PORT (
     CLK : in std_logic;
@@ -100,82 +107,85 @@ COMPONENT Display_Control port(
 END COMPONENT;
 
 begin
-
-Inst_SYNCHRNZR: SYNCHRNZR PORT MAP (
+--SINCRONIZADORES
+Inst_SYNCHRNZR_10CENT: SYNCHRNZR PORT MAP (
 async_in =>button_10cent ,
 clk => clk,
 sync_out => sync_media,
 reset => reset
 );
-Inst_SYNCHRNZR2: SYNCHRNZR PORT MAP (
+Inst_SYNCHRNZR_20CENT: SYNCHRNZR PORT MAP (
 async_in =>button_20cent ,
 clk => clk,
 sync_out => sync_media2,
 reset => reset
 );
-Inst_SYNCHRNZR3: SYNCHRNZR PORT MAP (
+Inst_SYNCHRNZR_50CENT: SYNCHRNZR PORT MAP (
 async_in =>button_50cent ,
 clk => clk,
 sync_out => sync_media3,
 reset => reset
 );
-Inst_SYNCHRNZR4: SYNCHRNZR PORT MAP (
+Inst_SYNCHRNZR_1EURO: SYNCHRNZR PORT MAP (
 async_in =>button_1euro ,
 clk => clk,
 sync_out => sync_media4,
 reset => reset
 );
 
-Inst_DEBOUNCER: DEBOUNCER PORT MAP (
+--DEBOUNCERS
+Inst_DEBOUNCER_10CENT: DEBOUNCER PORT MAP (
 btn_in =>sync_media ,
 clk => clk,
 btn_out => deb_media,
 reset => reset
 );
-Inst_DEBOUNCER2: DEBOUNCER PORT MAP (
+Inst_DEBOUNCER_20CENT: DEBOUNCER PORT MAP (
 btn_in =>sync_media2,
 clk => clk,
 btn_out => deb_media2,
 reset => reset
 );
-Inst_DEBOUNCER3: DEBOUNCER PORT MAP (
+Inst_DEBOUNCER_50CENT: DEBOUNCER PORT MAP (
 btn_in =>sync_media3 ,
 clk => clk,
 btn_out => deb_media3,
 reset => reset
 );
-Inst_DEBOUNCER4: DEBOUNCER PORT MAP (
+Inst_DEBOUNCER_1EURO: DEBOUNCER PORT MAP (
 btn_in =>sync_media4,
 clk => clk,
 btn_out => deb_media4,
 reset => reset
 );
 
-Inst_EDGEDTCTR: EDGEDTCTR PORT MAP (
+--DETECTORES DE FLANCO
+Inst_EDGEDTCTR_10CENT: EDGEDTCTR PORT MAP (
 sync_in =>deb_media ,
 clk => clk,
 edge=>sal_edge,
 reset => reset
 );
-Inst_EDGEDTCTR2: EDGEDTCTR PORT MAP (
+Inst_EDGEDTCTR_20CENT: EDGEDTCTR PORT MAP (
 sync_in =>deb_media2 ,
 clk => clk,
 edge=>sal_edge2,
 reset => reset
 );
-Inst_EDGEDTCTR3: EDGEDTCTR PORT MAP (
+Inst_EDGEDTCTR_50CENT: EDGEDTCTR PORT MAP (
 sync_in =>deb_media3 ,
 clk => clk,
 edge=>sal_edge3,
 reset => reset
 );
-Inst_EDGEDTCTR4: EDGEDTCTR PORT MAP (
+Inst_EDGEDTCTR_1EURO: EDGEDTCTR PORT MAP (
 sync_in =>deb_media4 ,
 clk => clk,
 edge=>sal_edge4,
 reset => reset
 );
 
+--CONTADOR
 Inst_CONTADOR: CONTADOR PORT MAP(
 CLK=>clk,
 ten_cent=>sal_edge,
@@ -188,6 +198,7 @@ vending=>vending,
 CUENTA=>cuenta
 );
 
+--MÁQUINA DE ESTADOS
 Inst_FSM: FSM PORT MAP(
 CUENTA=>cuenta,
 PRODUCTO=>producto,
@@ -198,6 +209,7 @@ VENDING=>vending,
 ERROR=>error 
 );
 
+--CONTROL DE LOS DISPLAYS
 Inst_DISPLAY_CONTROL: Display_Control port map(
 clk=>clk,
 error=>error,
