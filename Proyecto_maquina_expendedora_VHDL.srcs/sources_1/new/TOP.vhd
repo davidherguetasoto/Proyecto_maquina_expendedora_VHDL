@@ -21,27 +21,31 @@ end TOP;
 architecture Behavioral of TOP is
 
 --Señales intermedias de los sincronizadores
-signal sync_media: std_logic;
-signal sync_media2: std_logic;
-signal sync_media3: std_logic;
-signal sync_media4: std_logic;
+--signal sync_media: std_logic;
+--signal sync_media2: std_logic;
+--signal sync_media3: std_logic;
+--signal sync_media4: std_logic;
+signal sync_media: std_logic_vector(3 downto 0);
 --Señales para las salidas de los debouncers
-signal deb_media: std_logic;
-signal deb_media2: std_logic;
-signal deb_media3: std_logic;
-signal deb_media4: std_logic;
+--signal deb_media: std_logic;
+--signal deb_media2: std_logic;
+--signal deb_media3: std_logic;
+--signal deb_media4: std_logic;
+signal deb_media: std_logic_vector(3 downto 0);
 --Señales para las salidas de los detectores de flanco
-signal sal_edge: std_logic;
-signal sal_edge2: std_logic;
-signal sal_edge3: std_logic;
-signal sal_edge4: std_logic;
+--signal sal_edge: std_logic;
+--signal sal_edge2: std_logic;
+--signal sal_edge3: std_logic;
+--signal sal_edge4: std_logic;
+signal sal_edge:std_logic_vector(3 downto 0);
 --Señal para el bit de error de la FSM
 signal error : std_logic;
 --Señal para el bit de venta de la FSM
 signal vending: std_logic;
 --Señal para llevar la cuenta del dinero del contador
 signal cuenta: std_logic_vector (3 downto 0);
-
+--Señal para agrupar las entradas del dinero en un vector 
+signal monedas: std_logic_vector(3 downto 0);
 --COMPONENTES DE LA ENTIDAD
 COMPONENT SYNCHRNZR
 PORT (
@@ -107,91 +111,118 @@ COMPONENT Display_Control port(
 END COMPONENT;
 
 begin
+--ASIGNACIÓN DE LOS BOTONES DE MONEDAS A CADA POSICIÓN DEL VECTOR
+monedas(0)<=button_10cent;
+monedas(1)<=button_20cent;
+monedas(2)<=button_50cent;
+monedas(3)<=button_1euro;
+
+--INSTANCIACIÓN DE LAS ENTIDADES SINCRONIZADOR, DEBOUNCER Y DETECTOR DE FLANCO PARA EL ACONDICIONAMIENTO
+--DE LA SEÑAL PROCEDENTE DE LOS PULSADORES
+acondicionamiento_botones: for i in 0 to 3 generate
+inst_synchrnyzr: SYNCHRNZR port map(
+                            clk=>clk,
+                            async_in=>monedas(i),
+                            sync_out=>sync_media(i),
+                            reset=>reset);
+                            
+inst_debouncer: DEBOUNCER port map(
+                            CLK=>clk,
+                            btn_in=>sync_media(i),
+                            btn_out=>deb_media(i),
+                            reset=>reset);
+                            
+inst_edgedtctr: EDGEDTCTR port map(
+                            CLK=>clk,
+                            sync_in=>deb_media(i),
+                            edge=>sal_edge(i),
+                            reset=>reset);
+end generate acondicionamiento_botones;
 --SINCRONIZADORES
-Inst_SYNCHRNZR_10CENT: SYNCHRNZR PORT MAP (
-async_in =>button_10cent ,
-clk => clk,
-sync_out => sync_media,
-reset => reset
-);
-Inst_SYNCHRNZR_20CENT: SYNCHRNZR PORT MAP (
-async_in =>button_20cent ,
-clk => clk,
-sync_out => sync_media2,
-reset => reset
-);
-Inst_SYNCHRNZR_50CENT: SYNCHRNZR PORT MAP (
-async_in =>button_50cent ,
-clk => clk,
-sync_out => sync_media3,
-reset => reset
-);
-Inst_SYNCHRNZR_1EURO: SYNCHRNZR PORT MAP (
-async_in =>button_1euro ,
-clk => clk,
-sync_out => sync_media4,
-reset => reset
-);
+--Inst_SYNCHRNZR_10CENT: SYNCHRNZR PORT MAP (
+--async_in =>button_10cent ,
+--clk => clk,
+--sync_out => sync_media,
+--reset => reset
+--);
+--Inst_SYNCHRNZR_20CENT: SYNCHRNZR PORT MAP (
+--async_in =>button_20cent ,
+--clk => clk,
+--sync_out => sync_media2,
+--reset => reset
+--);
+--Inst_SYNCHRNZR_50CENT: SYNCHRNZR PORT MAP (
+--async_in =>button_50cent ,
+--clk => clk,
+--sync_out => sync_media3,
+--reset => reset
+--);
+--Inst_SYNCHRNZR_1EURO: SYNCHRNZR PORT MAP (
+--async_in =>button_1euro ,
+--clk => clk,
+--sync_out => sync_media4,
+--reset => reset
+--);
 
---DEBOUNCERS
-Inst_DEBOUNCER_10CENT: DEBOUNCER PORT MAP (
-btn_in =>sync_media ,
-clk => clk,
-btn_out => deb_media,
-reset => reset
-);
-Inst_DEBOUNCER_20CENT: DEBOUNCER PORT MAP (
-btn_in =>sync_media2,
-clk => clk,
-btn_out => deb_media2,
-reset => reset
-);
-Inst_DEBOUNCER_50CENT: DEBOUNCER PORT MAP (
-btn_in =>sync_media3 ,
-clk => clk,
-btn_out => deb_media3,
-reset => reset
-);
-Inst_DEBOUNCER_1EURO: DEBOUNCER PORT MAP (
-btn_in =>sync_media4,
-clk => clk,
-btn_out => deb_media4,
-reset => reset
-);
+----DEBOUNCERS
+--Inst_DEBOUNCER_10CENT: DEBOUNCER PORT MAP (
+--btn_in =>sync_media ,
+--clk => clk,
+--btn_out => deb_media,
+--reset => reset
+--);
+--Inst_DEBOUNCER_20CENT: DEBOUNCER PORT MAP (
+--btn_in =>sync_media2,
+--clk => clk,
+--btn_out => deb_media2,
+--reset => reset
+--);
+--Inst_DEBOUNCER_50CENT: DEBOUNCER PORT MAP (
+--btn_in =>sync_media3 ,
+--clk => clk,
+--btn_out => deb_media3,
+--reset => reset
+--);
+--Inst_DEBOUNCER_1EURO: DEBOUNCER PORT MAP (
+--btn_in =>sync_media4,
+--clk => clk,
+--btn_out => deb_media4,
+--reset => reset
+--);
 
---DETECTORES DE FLANCO
-Inst_EDGEDTCTR_10CENT: EDGEDTCTR PORT MAP (
-sync_in =>deb_media ,
-clk => clk,
-edge=>sal_edge,
-reset => reset
-);
-Inst_EDGEDTCTR_20CENT: EDGEDTCTR PORT MAP (
-sync_in =>deb_media2 ,
-clk => clk,
-edge=>sal_edge2,
-reset => reset
-);
-Inst_EDGEDTCTR_50CENT: EDGEDTCTR PORT MAP (
-sync_in =>deb_media3 ,
-clk => clk,
-edge=>sal_edge3,
-reset => reset
-);
-Inst_EDGEDTCTR_1EURO: EDGEDTCTR PORT MAP (
-sync_in =>deb_media4 ,
-clk => clk,
-edge=>sal_edge4,
-reset => reset
-);
+----DETECTORES DE FLANCO
+--Inst_EDGEDTCTR_10CENT: EDGEDTCTR PORT MAP (
+--sync_in =>deb_media ,
+--clk => clk,
+--edge=>sal_edge,
+--reset => reset
+--);
+--Inst_EDGEDTCTR_20CENT: EDGEDTCTR PORT MAP (
+--sync_in =>deb_media2 ,
+--clk => clk,
+--edge=>sal_edge2,
+--reset => reset
+--);
+--Inst_EDGEDTCTR_50CENT: EDGEDTCTR PORT MAP (
+--sync_in =>deb_media3 ,
+--clk => clk,
+--edge=>sal_edge3,
+--reset => reset
+--);
+--Inst_EDGEDTCTR_1EURO: EDGEDTCTR PORT MAP (
+--sync_in =>deb_media4 ,
+--clk => clk,
+--edge=>sal_edge4,
+--reset => reset
+--);
 
 --CONTADOR
 Inst_CONTADOR: CONTADOR PORT MAP(
 CLK=>clk,
-ten_cent=>sal_edge,
-twenty_cent=>sal_edge2,
-fifty_cent=>sal_edge3,
-one_euro=>sal_edge4,
+ten_cent=>sal_edge(0),
+twenty_cent=>sal_edge(1),
+fifty_cent=>sal_edge(2),
+one_euro=>sal_edge(3),
 RESET=>reset,
 ERROR=>error,
 vending=>vending,
