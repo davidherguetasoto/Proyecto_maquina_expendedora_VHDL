@@ -25,10 +25,7 @@ begin
     --Cuando la señal de RESET se active, la señal intermedia cuenta_aux y la salida 
     --cuenta pasarán a cero
         if RESET='0' then
-            cuenta_aux<="00000";
-            CUENTA<=(others=>'0');
-    
-            
+            cuenta_aux<="00000";          
         elsif rising_edge(CLK)then 
         --Si el bit de error o de venta está activo, la cuenta del dinero se reiniciará a cero      
             if ERROR='1' then
@@ -54,22 +51,20 @@ begin
                 end if;
             end if;
        end if;
-        
-       --La cuenta de salida podrá ir de 0 a 10, si la suma en cuenta_aux es mayor, la salida tomará el valor 11 (1011)
-       case cuenta_aux is
-            when "00000"=>CUENTA<="0000";
-            when "00001"=>CUENTA<="0001";
-            when "00010"=>CUENTA<="0010";
-            when "00011"=>CUENTA<="0011";
-            when "00100"=>CUENTA<="0100";
-            when "00101"=>CUENTA<="0101";
-            when "00110"=>CUENTA<="0110";
-            when "00111"=>CUENTA<="0111";
-            when "01000"=>CUENTA<="1000";
-            when "01001"=>CUENTA<="1001";
-            when "01010"=>CUENTA<="1010";
-            when others=>CUENTA<="1011";
-      end case;
     end process;
-
+    
+ --La cuenta de salida podrá ir de 0 a 10, si la suma en cuenta_aux es mayor, la salida tomará el valor 11 (1011)   
+    with cuenta_aux select
+        CUENTA<="0000" when "00000",
+                "0001" when "00001",
+                "0010" when "00010",
+                "0011" when "00011",
+                "0100" when "00100",
+                "0101" when "00101",
+                "0110" when "00110",
+                "0111" when "00111",
+                "1000" when "01000",
+                "1001" when "01001",
+                "1010" when "01010",
+                "1011" when others;
 end Behavioral;
