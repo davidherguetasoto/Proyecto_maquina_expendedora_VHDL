@@ -21,6 +21,8 @@ begin
     begin
     if (reset='0') then
     btn_out <= '0';
+    counter <= (others => '0');
+    btn_prev <= '0';
 	elsif (CLK'event and CLK='1') then
 		if (btn_prev xor btn_in) = '1' then
 			counter <= (others => '0');
