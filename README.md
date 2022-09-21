@@ -1,5 +1,5 @@
 # Proyecto_maquina_expendedora_VHDL
-Proyecto de la asignatura de Sistemas electrónicos digitales que consistirá en la programación de un sistema de una máquina expendedora en VHDL e implementación en FPGA.
+Proyecto de la asignatura de Sistemas electrónicos digitales que consistirá en la programación de un sistema de una máquina expendedora en VHDL e implementación en FPGA modelo Nexys 4 DDR.
 
 Incluye los archivos de código fuente del proyecto, incluidos los de testbech, y el fichero de restricciones empleado. Todos se encuentran en las subcarpetas del directorio Proyecto_maquina_expendedora_VHDL.srcs
 
